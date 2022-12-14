@@ -12,7 +12,7 @@ def is_root(pid: int):
     return pid == 0
 
 
-def is_process_failed(exit_code: int):
+def is_child_failed(exit_code: int):
     return exit_code == 0
 
 
@@ -36,7 +36,7 @@ def main():
         if is_root(child_pid):
             print(f'Parent[{os.getpid()}]: Child with PID {child_pid} terminated. Exit {exit_code}.')
             children.remove(child_pid)
-            if is_process_failed(exit_code):
+            if is_child_failed(exit_code):
                 children.append(fork())
         # else:
         # time.sleep(sleep_time)
