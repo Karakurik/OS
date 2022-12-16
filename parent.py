@@ -9,7 +9,7 @@ sleep_time = 10
 
 
 def is_root(pid: int):
-    return pid == 0
+    return pid != 0
 
 
 def is_child_failed(exit_code: int):
