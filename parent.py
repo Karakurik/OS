@@ -2,6 +2,7 @@
 import os
 import random as rnd
 import time
+import sys
 
 # author: karakurik
 
@@ -23,11 +24,11 @@ def fork():
         return child_pid
     else:
         random_number = rnd.randint(5, 10)
-        os.execl("child.py", str(random_number))
+        os.execl('./child.py', './child.py', str(random_number))
 
 
 def main():
-    fork_count = int(input())
+    fork_count = int(sys.argv[1])
     children = []
     for i in range(fork_count):
         children.append(fork())
@@ -38,8 +39,7 @@ def main():
             children.remove(child_pid)
             if is_child_failed(exit_code):
                 children.append(fork())
-        # else:
-        # time.sleep(sleep_time)
 
 
 main()
+os._exit(os.EX_OK)
